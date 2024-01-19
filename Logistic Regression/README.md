@@ -1,0 +1,1 @@
+Mostly copied from [Pytorch Quickstart tutorial](https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html)
