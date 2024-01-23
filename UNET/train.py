@@ -16,24 +16,23 @@ from utils import (
 LEARNING_RATE = 1e-4
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 BATCH_SIZE = 32
-NUM_EPOCHS = 100
+NUM_EPOCHS = 10
 NUM_WORKERS = 2
 IMAGE_HEIGHT = 160
 IMAGE_WIDTH = 240
 PIN_MEMORY = True
-LOAD_MODEL = True
+LOAD_MODEL = False
 TRAIN_IMG_DIR = "data/train_images/"
 TRAIN_MASK_DIR = "data/train_masks/"
 VAL_IMG_DIR = "data/val_images/"
 VAL_MASK_DIR = "data/val_masks/"
 
-# Do one epoch of training
 def train_fn(loader, model, optimizer, loss_fn, scaler):
     loop = tqdm(loader)
 
     for batch_idx, (data, targets) in enumerate(loop):
         data = data.to(device=DEVICE)
-        targets = targets.float().unsequeeze(1).to(device=DEVICE)
+        targets = targets.float().unsqueeze(1).to(device=DEVICE)
 
         # forward
         with torch.cuda.amp.autocast():
@@ -115,5 +114,6 @@ def main():
         save_predictions_as_imgs(
             val_loader, model, folder="saved_images/", device=DEVICE
         )
+
 if __name__ == "__main__":
     main()
