@@ -1,3 +1,4 @@
 Logistic Regression/data
 .idea
 UNET/data
+UNET/my_checkpoint.pth.tar
